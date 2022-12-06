@@ -1,25 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import initialList from "../bookslist";
-// import Search from "../search.js";
 import "./addbook.css";
+
 const Addbook = () => {
   const [list, setList] = React.useState(initialList);
 
   const { search } = window.location;
   const query = new URLSearchParams(search).get("s");
 
-  const filterPosts = (post, query) => {
+  const filterPosts = (posts, query) => {
+    // qurey search
     if (!query) {
-      return post;
+      return posts;
     }
-
-    return post.filter((post) => {
-      const postName = post.name.toLowerCase();
-      return postName.includes(query);
+    return posts.filter((post) => {
+      return Object.values(post)
+        .join(" ")
+        .toLowerCase()
+        .includes(query.toLowerCase());
     });
   };
-
   const filteredPosts = filterPosts(list, query);
+  // console.log(filteredPosts);
 
   var bookValue, authorValue, dateValue, subjectValue;
   const gettitleValue = (event) => {
@@ -34,11 +36,8 @@ const Addbook = () => {
   const getdateValue = (event) => {
     subjectValue = event.target.value;
   };
-  // const add=()=>{
-  //   List.push({title:bookValue,author:authorValue,date:dateValue,subject:subjectValue});
-  //   console.log(List);
-  // }
 
+  // button function
   function handleAdd() {
     const newList = list.concat({
       title: bookValue,
@@ -66,9 +65,9 @@ const Addbook = () => {
         </button>
       </div>
 
-      <form action="/" method="get">
+      <form action="/" method="get" className="search_bar">
         <label htmlFor="header-search">
-          <span className="visually-hidden">Search blog posts</span>
+          <span className="visually-hidden">Add Filter</span>
         </label>
         <input
           type="text"
@@ -93,7 +92,7 @@ const Addbook = () => {
           <tbody>
             {filteredPosts.map((data) => {
               return (
-                <tr key={data.key}>
+                <tr className="book-list">
                   {console.log(data)}
                   <td className="td_2">{data.title}</td>
                   <td className="td_2">{data.author}</td>
