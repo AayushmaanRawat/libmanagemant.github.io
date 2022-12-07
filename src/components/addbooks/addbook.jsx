@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import initialList from "../bookslist";
-import 'boxicons'
+import 'boxicons';
 import "./addbook.css";
 
 const Addbook = () => {
@@ -32,10 +32,10 @@ const Addbook = () => {
     authorValue = event.target.value;
   };
   const getsubjectValue = (event) => {
-    dateValue = event.target.value;
+    subjectValue = event.target.value;
   };
   const getdateValue = (event) => {
-    subjectValue = event.target.value;
+    dateValue  = event.target.value;
   };
 
   // button function
@@ -43,8 +43,9 @@ const Addbook = () => {
     const newList = list.concat({
       title: bookValue,
       author: authorValue,
-      date: dateValue,
       subject: subjectValue,
+      date: dateValue,
+     
     });
     setList(newList);
   }
@@ -66,7 +67,7 @@ const Addbook = () => {
         />
         <input placeholder="Enter Book Author" onChange={getauthorValue} />
         <input placeholder="Enter Book Subject" onChange={getsubjectValue} />
-        <input placeholder="Enter Book Publish Date" onChange={getdateValue} />
+        <input type="date" placeholder="Enter Book Publish Date" onChange={getdateValue} />
         <button className="btn" onClick={handleAdd}>
           Add
         </button>
