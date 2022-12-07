@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import initialList from "../bookslist";
+import 'boxicons'
 import "./addbook.css";
 
 const Addbook = () => {
@@ -48,6 +49,12 @@ const Addbook = () => {
     setList(newList);
   }
 
+  function handleRemove(id) {
+    const newList = filteredPosts.filter((item) => item.id !== id);
+    console.log(newList);
+    setList(newList);
+  }
+
   return (
     <div>
       <div className="maincontent">
@@ -79,7 +86,7 @@ const Addbook = () => {
         <button type="submit">Search</button>
       </form>
 
-      <div className="list">
+      <div className="list" onRemove={handleRemove}>
         <table>
           <thead>
             <tr>
@@ -93,11 +100,11 @@ const Addbook = () => {
             {filteredPosts.map((data) => {
               return (
                 <tr className="book-list">
-                  {console.log(data)}
                   <td className="td_2">{data.title}</td>
                   <td className="td_2">{data.author}</td>
                   <td className="td_2">{data.subject}</td>
                   <td className="td_2">{data.date}</td>
+                  <td type="button" onClick={() => handleRemove(data.id)}><box-icon name='trash'></box-icon></td>
                 </tr>
               );
             })}
