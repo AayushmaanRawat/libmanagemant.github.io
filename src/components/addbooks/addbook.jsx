@@ -12,8 +12,11 @@ const Addbook = () => {
   const filterPosts = (posts, query) => {
     // qurey search
     if (!query) {
+     // <h1>No Results Found!</h1>
       return posts;
     }
+    
+
     return posts.filter((post) => {
       return Object.values(post)
         .join(" ")
@@ -75,12 +78,12 @@ const Addbook = () => {
 
       <form action="/" method="get" className="search_bar">
         <label htmlFor="header-search">
-          <span className="visually-hidden">Add Filter</span>
+          <h3 className="visually-hidden">Filter results by Book Title/Author/Subject/Pulish Date</h3>
         </label>
         <input
           type="text"
           id="header-search"
-          placeholder="Search blog posts"
+          placeholder="Filter"
           name="s"
           onKeyUp={filterPosts}
         />
@@ -89,23 +92,28 @@ const Addbook = () => {
 
       <div className="list" onRemove={handleRemove}>
         <table>
-          <thead>
+          <thead class="table-head">
             <tr>
-              <th>Title({filteredPosts.length})</th>
+              <th>Title [Total No of copies : {filteredPosts.length}]</th>
               <th>Author</th>
               <th>Subject</th>
               <th>Publish Date</th>
+              <th>Delete</th>
             </tr>
           </thead>
+          
           <tbody>
             {filteredPosts.map((data) => {
-              return (
-                <tr className="book-list">
+        
+
+                
+                 return(
+                <tr className="book-list"> 
                   <td className="td_2">{data.title}</td>
                   <td className="td_2">{data.author}</td>
                   <td className="td_2">{data.subject}</td>
                   <td className="td_2">{data.date}</td>
-                  <td type="button" onClick={() => handleRemove(data.id)}><box-icon name='trash'></box-icon></td>
+                  <td className="del" type="button" onClick={() => handleRemove(data.id)}><box-icon name='trash'></box-icon></td>
                 </tr>
               );
             })}
