@@ -78,7 +78,7 @@ const Addbook = () => {
 
       <form action="/" method="get" className="search_bar">
         <label htmlFor="header-search">
-          <h3 className="visually-hidden">Filter results by Book Title/Author/Subject/Pulish Date</h3>
+          <h3 className="visually-hidden">Filter results by Book Title/Author/Subject/Publish Date</h3>
         </label>
         <input
           type="text"
